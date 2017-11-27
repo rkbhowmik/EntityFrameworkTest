@@ -14,54 +14,62 @@ namespace FootballApp
 			FootballContext ctx = new FootballContext();
 			Console.WriteLine("Enter a Team Name");
 			var teamName = Console.ReadLine();
-			var aTeam = new Team();
-			aTeam.TeamName = teamName;
-			ctx.SaveChanges();
+			var aTeam = ctx.Teams.SingleOrDefault(t => t.TeamName == teamName);
+			//	new Team();
+			//aTeam.TeamName = teamName;
+			//ctx.SaveChanges();
 
-			Console.WriteLine("\nEnter Arena's Name");
-			var arenaName = Console.ReadLine();
-			var anArena = new Arena();
-			anArena.ArenaName = arenaName;
-			anArena.Team = aTeam;
-			ctx.Arenas.Add(anArena);
-			ctx.SaveChanges();
+			//Console.WriteLine("\nEnter Arena's Name");
+			//var arenaName = Console.ReadLine();
+			//var anArena = new Arena();
+			//anArena.ArenaName = arenaName;
+			//anArena.Team = aTeam;
+			//ctx.Arenas.Add(anArena);
+			//ctx.SaveChanges();
 
-			Console.WriteLine("\nEnter Player's Name: ");
-			var playerName = Console.ReadLine();
-			var aPlayer = new Player();
-			aPlayer.Name = playerName;
-			aPlayer.Team = aTeam;
-			ctx.Players.Add(aPlayer);
-			ctx.SaveChanges();
+			//Console.WriteLine("\nEnter Player's Name: ");
+			//var playerName = Console.ReadLine();
+			//var aPlayer = new Player();
+			//aPlayer.Name = playerName;
+			//aPlayer.Team = aTeam;
+			//ctx.Players.Add(aPlayer);
+			//ctx.SaveChanges();
 
-			Console.WriteLine("\n*********************");
+			//Console.WriteLine("\n*********************");
 		
-			foreach (var theteams in ctx.Arenas)
-			{
-				Console.WriteLine($"{theteams.Team.TeamName} plays on {theteams.ArenaName}");
-			}
+			//foreach (var theteams in ctx.Arenas)
+			//{
+			//	Console.WriteLine($"{theteams.Team.TeamName} plays on {theteams.ArenaName}");
+			//}
 
-			Console.WriteLine("\n*********************");
+			//Console.WriteLine("\n*********************");
 
-			foreach (var player in ctx.Players)
-			{
-				Console.WriteLine($"{player.Name} plays for {player.Team.TeamName}"); 
-			}
+			//foreach (var player in ctx.Players)
+			//{
+			//	Console.WriteLine($"{player.Name} plays for {player.Team.TeamName}"); 
+			//}
 
-			Console.WriteLine("\n*********************");
-			Console.WriteLine("List of Arenas");
-			foreach (var arenaList in ctx.Arenas)
-			{
-				Console.WriteLine(arenaList.ArenaName);
-			}
+			//Console.WriteLine("\n*********************");
+			//Console.WriteLine("List of Arenas");
+			//foreach (var arenaList in ctx.Arenas)
+			//{
+			//	Console.WriteLine(arenaList.ArenaName);
+			//}
 
-			Console.WriteLine("\n*********************");
-			Console.WriteLine("List of Teams");
-			foreach (var teamList in ctx.Teams)
+			//Console.WriteLine("\n*********************");
+			//Console.WriteLine("List of Teams");
+			//foreach (var teamList in ctx.Teams)
+			//{
+			//	Console.WriteLine(teamList.TeamName);
+			//}
+			//Console.ReadLine();
+
+
+			foreach (var players in ctx.Players.Where(p=>p.TeamId== aTeam.TeamId))
 			{
-				Console.WriteLine(teamList.TeamName);
+				Console.WriteLine(players.Name);
+				Console.ReadLine();
 			}
-			Console.ReadLine();
 		}
 	}
 }
